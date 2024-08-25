@@ -101,7 +101,7 @@ if st.button(st.session_state.button_text, use_container_width=True):
     historical_data = stock_data.reset_index()
 
     # Predict the next num_days business day prices
-    prediction_data = predict_next_business_days(model_lstm, close_prices, look_back=30, days=num_days)
+    prediction_data = predict_next_business_days(model_lstm, close_prices, look_back=5, days=num_days)
     
     # Display historical data with all columns
     st.write("### NVIDIA-Historical Stock Data")
