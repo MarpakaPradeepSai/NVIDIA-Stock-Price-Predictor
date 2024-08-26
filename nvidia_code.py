@@ -103,17 +103,27 @@ st.markdown(
     unsafe_allow_html=True,
 )
 
+# Load stock data
+stock_data = get_stock_data(stock)
+close_prices = stock_data['Close'].values.reshape(-1, 1)
+dates = stock_data.index
+
+# Convert the stock data to HTML for styling
+stock_data_html = stock_data.to_html(classes='table table-striped', border=0)
+
+# Center the DataFrame using HTML and CSS
+st.markdown(
+    f"""
+    <div style="display: flex; justify-content: center; margin-top: 20px;">
+        {stock_data_html}
+    </div>
+    """,
+    unsafe_allow_html=True
+)
+
 # Use unique key for the "Forecast" button
 if st.button(f'Predict Next {num_days} Days Stock Prices for {stock}', key='forecast-button'):
-    # Load stock data
-    stock_data = get_stock_data(stock)
-    close_prices = stock_data['Close'].values.reshape(-1, 1)
-    dates = stock_data.index
-
-    # Display the historical data
-    st.markdown(f"### Historical Data for NVIDIA")
-    st.dataframe(stock_data)
-
+    
     # Predict the next num_days business days
     look_back = 5
     predictions = predict_next_business_days(model, close_prices, look_back=look_back, days=num_days)
@@ -161,3 +171,13 @@ if st.button(f'Predict Next {num_days} Days Stock Prices for {stock}', key='fore
     })
     st.markdown(f"##### Predicted Stock Prices for the Next {num_days} Business Days ({stock})")
     st.table(prediction_df)
+
+    # Center the GIF image at the end of the app
+    st.markdown(
+        """
+        <div style="display: flex; justify-content: center;">
+            <img src="https://media2.giphy.com/media/v1.Y2lkPTc5MGI3NjExZmF0cnVzNzN5MTU3dXZ6MTVmcjhjMmFndDdqaDdsNGpkdmdnZG96MSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/wIVA0zh5pt0G5YtcAL/giphy.webp" width="500">
+        </div>
+        """,
+        unsafe_allow_html=True
+    )
