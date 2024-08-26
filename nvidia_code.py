@@ -161,3 +161,5 @@ if st.button(f'Predict Next {num_days} Days Stock Prices for {stock}', key='fore
     })
     st.markdown(f"##### Predicted Stock Prices for the Next {num_days} Business Days ({stock})")
     st.table(prediction_df)
+
+st.image("https://media2.giphy.com/media/v1.Y2lkPTc5MGI3NjExZmF0cnVzNzN5MTU3dXZ6MTVmcjhjMmFndDdqaDdsNGpkdmdnZG96MSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/wIVA0zh5pt0G5YtcAL/giphy.webp", width = 200)
