@@ -103,25 +103,17 @@ st.markdown(
     unsafe_allow_html=True,
 )
 
-# Load stock data
-stock_data = get_stock_data(stock)
-close_prices = stock_data['Close'].values.reshape(-1, 1)
-dates = stock_data.index
-
-# Display a summary of the historical data at the center
-st.markdown("<h3 style='text-align: center;'>Historical Data Summary for NVIDIA</h3>", unsafe_allow_html=True)
-st.markdown(
-    f"""
-    <div style="text-align: center;">
-        <p>Showing the last 5 entries of historical data for {stock}</p>
-    </div>
-    """,
-    unsafe_allow_html=True
-)
-st.table(stock_data.tail(5))
-
 # Use unique key for the "Forecast" button
 if st.button(f'Predict Next {num_days} Days Stock Prices for {stock}', key='forecast-button'):
+    # Load stock data
+    stock_data = get_stock_data(stock)
+    close_prices = stock_data['Close'].values.reshape(-1, 1)
+    dates = stock_data.index
+
+    # Display the historical data
+    st.markdown(f"### Historical Data for NVIDIA")
+    st.dataframe(stock_data)
+
     # Predict the next num_days business days
     look_back = 5
     predictions = predict_next_business_days(model, close_prices, look_back=look_back, days=num_days)
@@ -169,4 +161,3 @@ if st.button(f'Predict Next {num_days} Days Stock Prices for {stock}', key='fore
     })
     st.markdown(f"##### Predicted Stock Prices for the Next {num_days} Business Days ({stock})")
     st.table(prediction_df)
-
