@@ -121,6 +121,8 @@ if st.button(f'Predict Next {num_days} Days Stock Prices for {stock}', key='fore
     # Create dates for the predictions
     last_date = dates[-1]
     prediction_dates = generate_business_days(last_date + timedelta(days=1), num_days)
+
+    st.write(" ")
     
     # Prepare data for plotting the historical and predicted prices
     fig, ax = plt.subplots()
