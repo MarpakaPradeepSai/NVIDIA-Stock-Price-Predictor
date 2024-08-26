@@ -55,7 +55,7 @@ st.markdown("<h1 style='text-align: center; font-size: 49px;'>Stock-Price-Predic
 st.markdown(
     """
     <div style="display: flex; justify-content: center;">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a4/NVIDIA_logo.svg/1920px-NVIDIA_logo.svg.png" width="520">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a4/NVIDIA_logo.svg/1920px-NVIDIA_logo.svg.png" width="540">
     </div>
     """,
     unsafe_allow_html=True
