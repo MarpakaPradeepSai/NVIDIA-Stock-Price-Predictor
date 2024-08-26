@@ -140,7 +140,7 @@ if st.button(f'Predict Next {num_days} Days Stock Prices for {stock}', key='fore
     # Plot only the predicted stock prices
     fig2, ax2 = plt.subplots()
     ax2.plot(prediction_dates, predictions, marker='o', color='blue')
-    ax2.set_xlabel('Date', fontsize=10)
+    ax2.set_xlabel('Date', fontsize=5)
     ax2.set_ylabel('Predicted Price')
     ax2.set_title(f'Predicted Stock Prices for the Next {num_days} Business Days ({stock})', fontsize=10, fontweight='bold')
     
