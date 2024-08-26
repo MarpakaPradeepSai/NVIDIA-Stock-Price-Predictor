@@ -160,4 +160,4 @@ if st.button(f'Predict Next {num_days} Days Stock Prices for {stock}', key='fore
         'Predicted Price': predictions.flatten()
     })
     st.markdown(f"##### Predicted Stock Prices for the Next {num_days} Business Days ({stock})")
-    st.table(prediction_df)
+    st.table(prediction_df, height=600, width=1000)
