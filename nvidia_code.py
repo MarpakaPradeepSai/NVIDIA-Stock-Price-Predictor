@@ -112,7 +112,7 @@ if st.button(f'Predict Next {num_days} Days Stock Prices for {stock}', key='fore
 
     # Display the historical data
     st.markdown(f"### Historical Data for NVIDIA")
-    st.dataframe(stock_data, height=600, width=1000)
+    st.dataframe(stock_data, height=400, width=1000)
 
     # Predict the next num_days business days
     look_back = 5
