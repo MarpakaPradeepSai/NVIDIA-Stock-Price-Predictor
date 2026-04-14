@@ -48,12 +48,17 @@ A comprehensive time series forecasting project that analyzes and predicts **NVI
 - 📰 **Sentiment Analysis:** Analyzes news articles and social media to gauge investor psychology
 
 ### ⚠️ Important Limitations
+
+<div align="center">
+  
 | Limitation | Description |
 |------------|-------------|
 | **Market Unpredictability** | Markets are influenced by unforeseen events (geopolitical issues, natural disasters) |
 | **No Guarantees** | Past performance doesn't guarantee future results |
 | **Complementary Tool** | Predictions should be used as one tool among many |
 | **Accuracy Limits** | No model can predict stock prices with 100% accuracy |
+
+</div>
 
 <br>
 
