@@ -119,9 +119,16 @@ Try the live stock price prediction model here:
 
 <div align="center">
 
-| Price Action & Forecast | Detailed Forecast |
-|:-----------------------:|:-----------------:|
-| <img src="https://github.com/MarpakaPradeepSai/NVIDIA-Stock-Price-Predictor/blob/main/Data/Images%20&%20GIF/NVIDIA_GIF_1.gif?raw=true" alt="Price Action & Forecast" width="100%"/> | <img src="https://github.com/MarpakaPradeepSai/NVIDIA-Stock-Price-Predictor/blob/main/Data/Images%20&%20GIF/NVIDIA_GIF_2.gif?raw=true" alt="Detailed Forecast" width="100%"/> |
+**Price Action & Forecast**
+
+<img src="https://github.com/MarpakaPradeepSai/NVIDIA-Stock-Price-Predictor/blob/main/Data/Images%20&%20GIF/NVIDIA_GIF_1.gif?raw=true" alt="Price Action & Forecast" width="900"/>
+
+<br>
+<br>
+
+**Detailed Forecast**
+
+<img src="https://github.com/MarpakaPradeepSai/NVIDIA-Stock-Price-Predictor/blob/main/Data/Images%20&%20GIF/NVIDIA_GIF_2.gif?raw=true" alt="Detailed Forecast" width="900"/>
 
 </div>
 
