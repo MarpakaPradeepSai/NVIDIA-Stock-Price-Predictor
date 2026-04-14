@@ -676,7 +676,8 @@ def get_stock_data(ticker='NVDA'):
         return None
 
 
-@st.cache_data(ttl=300)
+# NOTE: TTL lowered to keep the displayed quote blocks more real-time
+@st.cache_data(ttl=60)
 def get_live_quote(ticker='NVDA'):
     try:
         t = yf.Ticker(ticker)
@@ -1192,40 +1193,48 @@ st.markdown(f"""
 
 
 # ==============================
-# 🔹 Live Quote Strip
-# ==============================
-quote = get_live_quote(STOCK)
-
-if quote:
-    change_arrow = '▲' if quote['change'] >= 0 else '▼'
-
-    c1, c2, c3, c4 = st.columns(4)
-    with c1:
-        st.metric("NVDA · Last Price", f"${quote['price']:.2f}",
-                  delta=f"{change_arrow} {abs(quote['change']):.2f} ({abs(quote['change_pct']):.2f}%)")
-    with c2:
-        st.metric("Previous Close", f"${quote['prev_close']:.2f}")
-    with c3:
-        mktcap = quote.get('market_cap')
-        if mktcap and mktcap > 0:
-            mktcap_str = f"${mktcap/1e12:.2f}T" if mktcap >= 1e12 else f"${mktcap/1e9:.1f}B"
-        else:
-            mktcap_str = "N/A"
-        st.metric("Market Cap", mktcap_str)
-    with c4:
-        vol = quote.get('volume')
-        vol_str = f"{vol/1e6:.1f}M" if vol and vol > 0 else "N/A"
-        st.metric("Avg Volume", vol_str)
-
-st.markdown("---")
-
-# ==============================
 # 🔹 Session State Init
 # ==============================
 if 'prediction_results' not in st.session_state:
     st.session_state.prediction_results = None
 if 'last_num_days' not in st.session_state:
     st.session_state.last_num_days = 5
+
+
+# ==============================
+# 🔹 Live Quote Blocks (Placed right above the Forecast button)
+# ==============================
+quote = get_live_quote(STOCK)
+
+if quote:
+    change_arrow = '▲' if quote['change'] >= 0 else '▼'
+
+    # Make "NVIDIA LAST PRICE" slightly bigger (wider column + delta line)
+    c1, c2, c3, c4 = st.columns([1.35, 1, 1, 1])
+
+    with c1:
+        st.metric(
+            "NVIDIA LAST PRICE",
+            f"${quote['price']:.2f}",
+            delta=f"{change_arrow} {abs(quote['change']):.2f} ({abs(quote['change_pct']):.2f}%)"
+        )
+
+    with c2:
+        st.metric("PREVIOUS CLOSE", f"${quote['prev_close']:.2f}")
+
+    with c3:
+        mktcap = quote.get('market_cap')
+        if mktcap and mktcap > 0:
+            mktcap_str = f"${mktcap/1e12:.2f}T" if mktcap >= 1e12 else f"${mktcap/1e9:.1f}B"
+        else:
+            mktcap_str = "N/A"
+        st.metric("MARKET CAP", mktcap_str)
+
+    with c4:
+        vol = quote.get('volume')
+        vol_str = f"{vol/1e6:.1f}M" if vol and vol > 0 else "N/A"
+        st.metric("AVG VOLUME", vol_str)
+
 
 # ==============================
 # 🔹 Predict Button
@@ -1237,6 +1246,8 @@ with col_btn2:
         key='forecast-button',
         use_container_width=True
     )
+
+st.markdown("---")
 
 if run_prediction:
     if model is None:
