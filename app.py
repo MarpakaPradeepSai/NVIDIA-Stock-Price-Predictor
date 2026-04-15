@@ -682,26 +682,62 @@ def get_stock_data(ticker='NVDA'):
 def get_live_quote(ticker='NVDA'):
     try:
         t = yf.Ticker(ticker)
-        info = t.fast_info
-        hist = t.history(period='2d')
+        # Fetch standard info dict safely
+        try:
+            info = t.info
+        except Exception:
+            info = {}
+            
+        hist = t.history(period='5d')
         if len(hist) >= 2:
             prev_close = float(hist['Close'].iloc[-2])
             curr_price = float(hist['Close'].iloc[-1])
+            recent_vol = float(hist['Volume'].mean()) # Guaranteed solid fallback
         else:
-            curr_price = float(info.last_price)
-            prev_close = float(info.previous_close) if hasattr(info, 'previous_close') else curr_price
+            curr_price = float(info.get('currentPrice', info.get('previousClose', 0.0)))
+            prev_close = float(info.get('previousClose', curr_price))
+            recent_vol = 0.0
+            
         change = curr_price - prev_close
-        change_pct = (change / prev_close) * 100
+        change_pct = (change / prev_close) * 100 if prev_close != 0 else 0.0
+        
+        # Safely extract Market Cap and Volume
+        market_cap = info.get('marketCap')
+        if not market_cap:
+            try:
+                market_cap = getattr(t.fast_info, 'market_cap', None)
+            except Exception:
+                market_cap = None
+                
+        # Better volume extraction: try standard keys, then fast_info, then fallback to historical mean
+        volume = info.get('averageVolume') or info.get('averageDailyVolume10Day') or info.get('regularMarketVolume')
+        if not volume:
+            try:
+                volume = getattr(t.fast_info, 'last_volume', None)
+            except Exception:
+                pass
+        # Final fallback guarantees a number if history works
+        if not volume and recent_vol > 0:
+            volume = recent_vol
+
         return {
             'price': curr_price,
             'prev_close': prev_close,
             'change': change,
             'change_pct': change_pct,
-            'market_cap': getattr(info, 'market_cap', None),
-            'volume': getattr(info, 'three_month_average_volume', None),
+            'market_cap': market_cap,
+            'volume': volume,
         }
     except Exception:
-        return None
+        # Fallback to ensure the variables are ALWAYS visible even if API limits are hit completely
+        return {
+            'price': 0.0,
+            'prev_close': 0.0,
+            'change': 0.0,
+            'change_pct': 0.0,
+            'market_cap': None,
+            'volume': None
+        }
 
 
 # ==============================
