@@ -65,6 +65,8 @@ A comprehensive time series forecasting project that analyzes and predicts **NVI
   <img src="https://raw.githubusercontent.com/MarpakaPradeepSai/NVIDIA-Stock-Price-Predictor/28d9cf153ca898289f7d3c793fa372634f581d87/Data/Images%20%26%20GIF/NVIDIA_logo_black.svg" alt="NVIDIA Logo" width="700"/>
 </div>
 
+<br>
+
 NVIDIA presents a compelling subject for stock price analysis due to several key factors:
 
 ### 🏆 Industry Leadership & Innovation
