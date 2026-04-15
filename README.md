@@ -145,11 +145,11 @@ Try the live stock price prediction model here:
 ## 📁 Project Structure
 
 ```
-nvidia-stock-price-prediction/
+NVIDIA-Stock-Price-Predictor/
 ├── Data/
 │   └── NVIDIA.csv                                  # Historical stock dataset (1999–2024)
 ├── Model/
-│   └── NVIDIA_LSTM_LB(5)_U(150)_RMSE(1.32).keras  # Saved best LSTM model
+│   └── NVIDIA_LSTM_LB(5)_U(150)_RMSE(1.32).keras   # Saved best LSTM model
 ├── Notebook/
 │   └── NVIDIA_Stock_Price_Analysis.ipynb           # Full analysis & model comparison notebook
 ├── app.py                                          # Streamlit web application
